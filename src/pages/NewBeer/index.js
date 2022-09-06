@@ -18,7 +18,7 @@ function NewBeer() {
   const navigate = useNavigate();
 
   function handleChange(e) {
-    if (e.target.name === "attenuation_level") {
+    if (e.target.type === "number") {
       setForm({ ...form, [e.target.name]: +e.target.value });
     } else {
       setForm({ ...form, [e.target.name]: e.target.value });
@@ -101,14 +101,6 @@ function NewBeer() {
           onChange={handleChange}
           type="text"
           required
-        />
-
-        <label>Image URL</label>
-        <input
-          name="image_url"
-          value={form.image_url}
-          onChange={handleChange}
-          type="text"
         />
 
         <button type="submit">ADD NEW</button>
