@@ -18,11 +18,9 @@ function NewBeer() {
   const navigate = useNavigate();
 
   function handleChange(e) {
-    if (e.target.type === "number") {
-      setForm({ ...form, [e.target.name]: +e.target.value });
-    } else {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    }
+    e.target.type === "number"
+      ? setForm({ ...form, [e.target.name]: +e.target.value })
+      : setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   async function handleSubmit(e) {
