@@ -46,7 +46,7 @@ function DetailsBeer() {
           <h3>{beer.contributed_by}</h3>
         </div>
         <Link to="/beers">
-          <button className="back-btn">{"< "}VOLTAR</button>
+          <button className="back-btn">{"< "}BACK</button>
         </Link>
       </div>
     </div>

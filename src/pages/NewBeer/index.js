@@ -5,23 +5,31 @@ import { useState } from "react";
 
 function NewBeer() {
   const [form, setForm] = useState({
+    image_url: "",
     name: "",
-    age: "",
-    type: "",
-    sign: "",
+    tagline: "",
+    description: "",
+    first_brewed: "",
+    brewers_tips: "",
+    attenuation_level: "",
+    contributed_by: "",
   });
 
   const navigate = useNavigate();
 
   function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    if (e.target.name === "attenuation_level") {
+      setForm({ ...form, [e.target.name]: +e.target.value });
+    } else {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      await axios.post("https://ironrest.herokuapp.com/wd-85-ft", form);
+      await axios.post("https://ih-beers-api2.herokuapp.com/beers/new", form);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -34,24 +42,76 @@ function NewBeer() {
         {" "}
         <Header />
       </Link>
-      <form onSubmit={handleSubmit}>
-        <label>Nome</label>
-        <input name="name" value={form.name} onChange={handleChange} />
+      <form className="form-container" onSubmit={handleSubmit}>
+        <label>Name</label>
+        <input
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          type="text"
+          required
+        />
 
-        <label>Idade</label>
-        <input name="age" value={form.age} onChange={handleChange} />
+        <label>Tagline</label>
+        <input
+          name="tagline"
+          value={form.tagline}
+          onChange={handleChange}
+          type="text"
+        />
 
-        <label>Signo</label>
-        <input name="sign" value={form.sign} onChange={handleChange} />
+        <label>Description</label>
+        <textarea
+          name="description"
+          rows="5"
+          cols="33"
+          value={form.description}
+          onChange={handleChange}
+          type="text"
+        ></textarea>
 
-        <label>Tipo</label>
-        <select name="type" onChange={handleChange}>
-          <option value="professor">Professor</option>
-          <option value="aluno">Aluno</option>
-          <option value="ta">Ta</option>
-        </select>
+        <label>First Brewed</label>
+        <input
+          name="first_brewed"
+          value={form.first_brewed}
+          onChange={handleChange}
+          type="text"
+        />
 
-        <button type="submit">Salvar</button>
+        <label>Brewers Tips</label>
+        <input
+          name="brewers_tips"
+          value={form.brewers_tips}
+          onChange={handleChange}
+          type="text"
+        />
+
+        <label>Attenuation Level</label>
+        <input
+          name="attenuation_level"
+          value={form.attenuation_level}
+          onChange={handleChange}
+          type="number"
+        />
+
+        <label>Contributed By</label>
+        <input
+          name="contributed_by"
+          value={form.contributed_by}
+          onChange={handleChange}
+          type="text"
+          required
+        />
+
+        <label>Image URL</label>
+        <input
+          name="image_url"
+          value={form.image_url}
+          onChange={handleChange}
+          type="text"
+        />
+
+        <button type="submit">ADD NEW</button>
       </form>
     </div>
   );
